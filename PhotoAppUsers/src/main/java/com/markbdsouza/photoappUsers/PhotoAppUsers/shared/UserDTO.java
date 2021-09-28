@@ -1,8 +1,10 @@
 package com.markbdsouza.photoappUsers.PhotoAppUsers.shared;
 
+import com.markbdsouza.photoappUsers.PhotoAppUsers.model.AlbumResponseModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class UserDTO implements Serializable {
@@ -13,4 +15,6 @@ public class UserDTO implements Serializable {
     private String password;
     private String email;
     private String encryptedPassword;
+    private List<AlbumResponseModel> albums;
+
 }

@@ -28,18 +28,22 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        //only allow http from any url with prefix users
-//        http.authorizeRequests().antMatchers("/users/**")
-//                .permitAll();
-//        http.headers().frameOptions().disable(); // to allow h2 console url to be accessible
-
         http.csrf().disable();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/**" ).access("hasIpAddress(\"192.168.0.0/16\") or hasIpAddress(\"127.0.0.0/16\")" )
-                .antMatchers("/users/actuator/**").permitAll()
+//        //only allow http from any url with prefix users
+        http.authorizeRequests().antMatchers("/**")
+                .permitAll()
                 .and()
                 .addFilter(getAuthenticationFilter());
-        ;
+        http.headers().frameOptions().disable(); // to allow h2 console url to be accessible
+
+//        http.csrf().disable();
+//        http.authorizeRequests()
+//                .antMatchers(HttpMethod.POST, "/**" )
+//                .access("hasIpAddress(\"192.168.0.0/16\") or hasIpAddress(\"127.0.0.0/16\")" )
+//                .antMatchers("/users/actuator/**").permitAll()
+//                .and()
+//                .addFilter(getAuthenticationFilter());
+
         http.headers().frameOptions().disable(); // to allow h2 console url to be accessible
 
 

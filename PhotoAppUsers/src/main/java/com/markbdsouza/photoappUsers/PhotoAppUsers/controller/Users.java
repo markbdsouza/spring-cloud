@@ -2,6 +2,7 @@ package com.markbdsouza.photoappUsers.PhotoAppUsers.controller;
 
 import com.markbdsouza.photoappUsers.PhotoAppUsers.model.CreateUserRequestModel;
 import com.markbdsouza.photoappUsers.PhotoAppUsers.model.CreateUserResponseModel;
+import com.markbdsouza.photoappUsers.PhotoAppUsers.model.UserResponseModel;
 import com.markbdsouza.photoappUsers.PhotoAppUsers.service.UserService;
 import com.markbdsouza.photoappUsers.PhotoAppUsers.shared.UserDTO;
 import org.modelmapper.ModelMapper;
@@ -37,4 +38,13 @@ public class Users {
         CreateUserResponseModel createdUserDetails = modelMapper.map(createdUser, CreateUserResponseModel.class);
         return new ResponseEntity<>(createdUserDetails, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId){
+        UserDTO userDto = userService.getUserbyId(userId);
+        ModelMapper modelMapper = new ModelMapper();
+        UserResponseModel userResponseModel = modelMapper.map(userDto, UserResponseModel.class);
+        return new ResponseEntity<>(userResponseModel, HttpStatus.OK);
+    }
+
 }
